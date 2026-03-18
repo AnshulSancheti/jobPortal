@@ -22,7 +22,7 @@ export default function App() {
   const [selectedJob, setSelectedJob] = useState(null)
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts?_limit=20')
+    fetch('https://jsonplaceholder.typicode.com/posts?_limit=50')
       .then((res) => {
         if (!res.ok) throw new Error('Failed to fetch jobs')
         return res.json()
