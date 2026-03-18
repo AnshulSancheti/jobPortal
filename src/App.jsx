@@ -3,6 +3,7 @@ import Navbar from './components/Navbar.jsx'
 import SearchBar from './components/SearchBar.jsx'
 import JobCard from './components/JobCard.jsx'
 import JobModal from './components/JobModal.jsx'
+import jobsData from './data/jobs.js'
 import './App.css'
 
 export default function App() {
@@ -22,23 +23,8 @@ export default function App() {
   const [selectedJob, setSelectedJob] = useState(null)
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts?_limit=50')
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to fetch jobs')
-        return res.json()
-      })
-      .then((posts) => {
-        const mapped = posts.map((post) => ({
-          id: post.id,
-          role: post.title,
-          description: post.body,
-          company: `Company #${post.userId}`,
-          location: 'Remote',
-        }))
-        setJobs(mapped)
-      })
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false))
+    setJobs(jobsData)
+    setLoading(false)
   }, [])
 
   const handleSave = (id) => setSavedJobs((prev) => new Set([...prev, id]))
